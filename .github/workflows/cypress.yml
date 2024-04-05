@@ -1,30 +1,25 @@
-name: Checkout
-
+name: Cypress Tests Run on Pipeline
 on: [push]
-
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false 
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: setup node
-        uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run 
+        id: cypress
+        uses: cypress-io/github-action@v4
         with:
-          node-version: '14'
-      - name: install dependencies
-        run: npm install        
-      - name: execute cypress
-        run: npx cypress run
-      - name: generate screenshots
-        uses: actions/upload-artifact@v4
+          browser: chrome
+      - uses: actions/upload-artifact@v3
         if: failure()
-        with: 
-          name: screenshots
+        with:
+          name: cypress-screenshots
           path: cypress/screenshots
-      - name: generate videos
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with: 
-          name: videos
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
           path: cypress/videos

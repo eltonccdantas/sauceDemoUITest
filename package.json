@@ -4,12 +4,15 @@
   "description": "Testes Automatizados de Interface Gráfica / UI",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "npx cypress open",
+    "cy:run": "npx cypress run",
+    "test": "npx cypress run"
   },
   "keywords": [
     "test",
     "ui",
-    "cypress"
+    "cypress",
+    "xpeducacao"
   ],
   "author": "Elton Dantas",
   "license": "ISC",
