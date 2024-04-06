@@ -1,18 +1,16 @@
-name: Checkout
-
+name: CI
 on: [push]
-
 jobs:
-  cypress-run:
+  lhci:
+    name: Lighthouse
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: setup node
-        uses: actions/setup-node@v4
-        # with:
-        #   node-version: '18'
-      - name: install dependencies
-        run: npm install        
-      - name: execute cypress
-        run: lhci autorun
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x 
+      - name: run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.13.x
+          lhci autorun
