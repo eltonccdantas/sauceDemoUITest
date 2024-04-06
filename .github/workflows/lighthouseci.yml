@@ -10,8 +10,8 @@ jobs:
         uses: actions/checkout@v4
       - name: setup node
         uses: actions/setup-node@v4
-        with:
-          node-version: '16'
+        # with:
+        #   node-version: '18'
       - name: install dependencies
         run: npm install        
       - name: execute cypress
